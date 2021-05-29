@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumindo API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-1 text-center">
+        <h1> API de Treinos</h1>
+        <hr>
+    </div>
+    <div class="container p-4 mt-2 bg-dark" style="display: flex; flex-wrap: wrap;">
+        <div id="dorsal" ></div>
+        <div id="pernas" ></div>
+    </div>
+    <br><br>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(()=>{
+            let urlAPI_treinoDorsal = "http://localhost:4000/treino/dorsal"
+            let urlAPI_treinoPernas = "http://localhost:4000/treino/pernas"
+            let dorsal = document.getElementById("dorsal")
+            let pernas = document.getElementById("pernas")
+            const cardElement = (tipoTreino, descTreino) =>{
+                return `
+                <div class="card p-2 mt-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">${tipoTreino}</h5>
+                        <hr>
+                        <p class="lead">
+                            ${descTreino}    
+                        </p>
+
+                    </div>
+                </div>`
+            }
+
+            const cardElement2 = (tipoTreino, descTreino) =>{
+                return `
+                <div class="card p-2 mt-2" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">${tipoTreino}</h5>
+                        <hr>
+                        <p class="lead">
+                            ${descTreino}    
+                        </p>
+
+                    </div>
+                </div>`
+            }
+
+            // get treino pernas...
+            fetch(urlAPI_treinoPernas,{method: "get"})
+            .then((resposta)=>{
+                resposta.json().then((data)=>{
+                    console.log(data)
+                    pernas.innerHTML = data.map((treino) => {
+                        return cardElement(treino.tipo, treino.descricao);
+                    })
+                    .join("");
+
+
+                })
+            });
+
+            fetch(urlAPI_treinoDorsal,{method: "get"})
+            .then((resposta)=>{
+                resposta.json().then((data)=>{
+                    console.log(data)
+                    dorsal.innerHTML = data.map((treino) => {
+                        return cardElement(treino.tipo, treino.descricao);
+                    })
+                    .join("");
+
+
+                })
+            })
+
+
+        })
+
+    </script>
+</body>
+</html>
