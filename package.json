@@ -1,0 +1,26 @@
+{
+  "name": "criando_API",
+  "version": "1.0.0",
+  "description": "Consumindo API no Front e no Back-end | CodeDrops #45 | Tutorial com Mayk Brito do RockSeat",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edurojas-dev/criando_API.git"
+  },
+  "keywords": [],
+  "author": "Eduardo Rojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edurojas-dev/criando_API/issues"
+  },
+  "homepage": "https://github.com/edurojas-dev/criando_API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
