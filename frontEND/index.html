@@ -6,88 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consumindo API</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
-    <div class="container mt-1 text-center">
+    <div class="container mt-1">
         <h1> API de Treinos</h1>
         <hr>
+        <div>
+            <form method="POST" action="http://localhost:4000/treino/cadastrar">
+                <label class="h4">Cadastrar novo Treino</label>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <input class="form-control form-control-lg" type="text" placeholder="Tipo">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control form-control-lg" type="text" placeholder="Descrição do Treino">
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-info">
+                        Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="container p-4 mt-2 bg-dark" style="display: flex; flex-wrap: wrap;">
-        <div id="dorsal" ></div>
-        <div id="pernas" ></div>
+    <div class="container-fluid p-4 mt-2 bg-dark" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+        <div id="dorsal" class="mr-3"></div>
+        <div id="pernas" class="mr-3"></div>
     </div>
     <br><br>
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(()=>{
-            let urlAPI_treinoDorsal = "http://localhost:4000/treino/dorsal"
-            let urlAPI_treinoPernas = "http://localhost:4000/treino/pernas"
-            let dorsal = document.getElementById("dorsal")
-            let pernas = document.getElementById("pernas")
-            const cardElement = (tipoTreino, descTreino) =>{
-                return `
-                <div class="card p-2 mt-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title">${tipoTreino}</h5>
-                        <hr>
-                        <p class="lead">
-                            ${descTreino}    
-                        </p>
-
-                    </div>
-                </div>`
-            }
-
-            const cardElement2 = (tipoTreino, descTreino) =>{
-                return `
-                <div class="card p-2 mt-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title">${tipoTreino}</h5>
-                        <hr>
-                        <p class="lead">
-                            ${descTreino}    
-                        </p>
-
-                    </div>
-                </div>`
-            }
-
-            // get treino pernas...
-            fetch(urlAPI_treinoPernas,{method: "get"})
-            .then((resposta)=>{
-                resposta.json().then((data)=>{
-                    console.log(data)
-                    pernas.innerHTML = data.map((treino) => {
-                        return cardElement(treino.tipo, treino.descricao);
-                    })
-                    .join("");
-
-
-                })
-            });
-
-            fetch(urlAPI_treinoDorsal,{method: "get"})
-            .then((resposta)=>{
-                resposta.json().then((data)=>{
-                    console.log(data)
-                    dorsal.innerHTML = data.map((treino) => {
-                        return cardElement(treino.tipo, treino.descricao);
-                    })
-                    .join("");
-
-
-                })
-            })
-
-
-        })
-
-    </script>
 </body>
 </html>
